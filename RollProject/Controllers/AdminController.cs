@@ -24,7 +24,8 @@ namespace RollProject.Controllers
             {
                 return RedirectToAction("SendOTP","Account");
             }
-            //clearotp();
+
+            clearotp();
 
             int count = 0;
 
@@ -38,27 +39,27 @@ namespace RollProject.Controllers
                 }
 
             }
-            ViewBag.count = count;
 
+            ViewBag.count = count;
             return View();
         }
 
-        //private void clearotp()
-        //{
-        //    int userid = Convert.ToInt32(Session["userid"]);
-        //    using(SqlConnection con=new SqlConnection(connections))
-        //    {
-        //        string query = "Update user_data SET otp=null Where Id=@Id";
-        //        using (SqlCommand cmd = new SqlCommand(query,con))
-        //        {
-        //            cmd.Parameters.AddWithValue("@Id", userid);
-        //            con.Open();
-        //            cmd.ExecuteNonQuery();
-        //        }
+        private void clearotp()
+        {
+            int userid = Convert.ToInt32(Session["userid"]);
+            using (SqlConnection con = new SqlConnection(connections))
+            {
+                string query = "Update user_data SET otp=null Where Id=@Id";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Id", userid);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
 
-        //    }
+            }
 
-        //}
+        }
 
         public ActionResult Multiple_Image()
         {
@@ -82,9 +83,10 @@ namespace RollProject.Controllers
                 return RedirectToAction("Multiple_image");
             }
 
-
+            //check image is null or not
             if (image != null)
                 {
+                    //file path  where image is upload
                     string folder_path = Server.MapPath("~/Content/Upload_Image");
 
                     if (!Directory.Exists(folder_path))
@@ -131,6 +133,7 @@ namespace RollProject.Controllers
             {
                 return RedirectToAction("SendOTP", "Account");
             }
+
             List<image_data> images = new List<image_data>();   
 
             try
@@ -280,34 +283,7 @@ namespace RollProject.Controllers
             
         }
 
-        //[HttpPost]
-        ////Update User Status
-        //public ActionResult UpdateUserStatus(bool IsActive)
-        //{
-        //    int Userid = Convert.ToInt32(Session["UserId"]);
 
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connections))
-        //        {
-        //            string query = "UPDATE user_data SET IsActive = @IsActive WHERE Id = @Id";
-        //            using (SqlCommand cmd = new SqlCommand(query, conn))
-        //            {
-        //                cmd.Parameters.AddWithValue("@Id", Userid);
-        //                cmd.Parameters.AddWithValue("@IsActive", IsActive);
-        //                conn.Open();
-        //                cmd.ExecuteNonQuery();
-        //            }
-        //        }
-        //        TempData["Success"] = "User status updated successfully.";
-        //        return RedirectToAction("UserList", "Admin");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["Error"] = "Something went wrong: " + ex.Message;
-        //        return RedirectToAction("UserList", "Admin");
-        //    }
-        //}
         [HttpPost]
         public ActionResult UpdateUserStatus(int id, bool isActive)
         {

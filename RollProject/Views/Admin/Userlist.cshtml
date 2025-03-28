@@ -4,65 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<table class="table table-bordered table-hover">
-
-        <tr>
-            <td>ID</td>
-            <td>Username</td>
-            <td>Email</td>
-            <td>Rollid</td>
-            <td>Delete</td>
-            <td>Status</td>
-        </tr>
-
-        @foreach (var data in Model)
-        {
-            <tr>
-                <td>@data.Id</td>
-                <td>@data.Username</td>
-                <td>@data.Email</td>
-                <td>@data.Rollid</td>
-                <td>
-                    <form action="@Url.Action("Remove", "Admin")" method="post">
-                        <input type="hidden" name="Id" value="@data.Id" />
-                        <button class="btn btn-primary" onclick="confirm('Are you sure want to delete?')">Delete</button>
-                    </form>
-                </td>
-
-                <td>
-                    <select class="form-select status-dropdown p-1" data-userid="@data.Id">
-                        <option value="1" @(!data.IsActive ? "selected" : "")>Active</option>
-                        <option value="0" @(!data.IsActive ? "selected" : "")>Inactive</option>
-                    </select>
-                </td>
-            </tr>
-        }
-    </table>
-    <script>
-        $(document).ready(function () {
-            $(".status-dropdown").change(function () {
-                var userId = $(this).data("userId");
-                var isActive = $(this).val() == "1"; //"1" string convert to boolean
-
-                $.ajax({
-                    url: '@Url.Action("UpdateUserStatus", "Admin")',
-                    type: "POST",
-                    data: { userId: userId, isActive: isActive },
-                    success: function (response) {
-                        if (response.success) {
-                            alert("User status updated successfully!");
-                        } else {
-                            alert("Error updating status: " + response.message);
-                        }
-                    },
-                    error: function () {
-                        alert("Something went wrong. Please try again.");
-                    }
-                });
-            });
-        });
-    </script>*@
-
 <table class="table table-bordered table-hover display nowrap"  id="myTable"  style="width:100%">
     <thead>
         <tr>
@@ -90,7 +31,7 @@
                 </td>
 
                 <td>
-
+                    <!--This code represent Active Inactive case-->
                     <form action="@Url.Action("UpdateUserStatus", "Admin")" method="post">
                         <input type="hidden" name="Id" value="@data.Id" />
                         <select name="IsActive"  onchange="this.form.submit()">
