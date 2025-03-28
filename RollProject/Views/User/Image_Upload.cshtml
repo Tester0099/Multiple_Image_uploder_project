@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Image_Upload";
+    Layout = "~/Views/Shared/User_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <form action="/User/Upload" method="post" enctype="multipart/form-data">
+        <div class="mb-2 ">
+            <label class="form-label">IMAGE INSERT</label><br />
+            <input type="file" class="border border-1 p-1 rounded" multiple name="image" />
+        </div>
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+

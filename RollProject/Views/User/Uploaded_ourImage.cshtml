@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Uploaded_ourImage";
+    Layout = "~/Views/Shared/User_Layout.cshtml";
+}
+
+<table class="table table-bordered table-hover w-auto">
+    <tr>
+        <td>SrNo</td>
+        <td>Id</td>
+        <td>Image</td>
+        <td>Delete</td>
+        <td>Edit</td>
+    </tr>
+    @{
+        var s = 1;
+    }
+
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@s</td>
+            <td>@x.id</td>
+            <td>
+                <img src="~/Content/Upload_Image/@x.image" class="img-fluid" style="width:100px;height:100px;" />
+            </td>
+            <td>
+                <form action="@Url.Action("Delete_img","User")" method="post">
+                    <input type="hidden" name="Id" value="@x.id" />
+                    <button class="btn btn-danger" onclick="confirm('Are you sure want to delete ?')">Delete</button>
+                </form>
+            </td>
+            <td>
+                <a class="btn btn-primary"   href="@Url.Action("Edit","User" ,new { id=x.id})">Edit</a>
+            </td>
+        </tr>
+        s++;
+    }
+</table>
+
+
+
+
+

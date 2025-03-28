@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "show_image";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered table-hover w-75">
+    <tr>
+        <td>Id</td>
+        <td>Image</td>
+        <td>UserID</td>
+    </tr>
+    @foreach (var data in Model) { 
+        <tr>
+            <td>@data.id</td>
+            <td><img src="~/Content/Upload_Image/@data.image" style="width:100px; height:100px;"/></td>
+            <td>@data.Userid</td>
+        </tr>
+    }
+</table>
+

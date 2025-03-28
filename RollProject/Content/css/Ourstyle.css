@@ -1,0 +1,9 @@
+﻿
+.user_info {
+    position: absolute;
+    z-index: 99999;
+    top: 45px;
+    left: 263px;
+    background: white;
+    display: none;
+}
