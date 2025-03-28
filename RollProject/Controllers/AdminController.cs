@@ -25,6 +25,7 @@ namespace RollProject.Controllers
                 return RedirectToAction("SendOTP","Account");
             }
 
+            //Call function
             clearotp();
 
             int count = 0;
@@ -44,6 +45,7 @@ namespace RollProject.Controllers
             return View();
         }
 
+        //Clear OTP from database
         private void clearotp()
         {
             int userid = Convert.ToInt32(Session["userid"]);
@@ -67,6 +69,7 @@ namespace RollProject.Controllers
         }
 
 
+        //Multiple image upload
         [HttpPost]
         public async Task<ActionResult> Multiple_Image(IEnumerable<HttpPostedFileBase> image,user_data data,image_data info)
         {
@@ -74,13 +77,13 @@ namespace RollProject.Controllers
 
             if (Session["Userid"] == null)
             {
-                return RedirectToAction("otp_verificatin");
+                return RedirectToAction("SendOTP","Account");
             }
          
             if (userid == 0)
             {
                 TempData["error"] = "User not found!";
-                return RedirectToAction("Multiple_image");
+                return RedirectToAction("SendOTP","Account");
             }
 
             //check image is null or not
@@ -120,11 +123,14 @@ namespace RollProject.Controllers
                     }
 
                 }
+
             TempData["msg"] = "Image insert";
             return RedirectToAction("Multiple_Image");
 
         }
 
+
+        //Show image in list
         [HttpGet]
         public ActionResult show_image(image_data data)
         {
@@ -271,7 +277,6 @@ namespace RollProject.Controllers
                         cmd.ExecuteNonQuery();
                     }
                 }
-
                 TempData["msg"] = "Data delete successfully";
                 return RedirectToAction("Userlist", "Admin");
             }
@@ -284,10 +289,10 @@ namespace RollProject.Controllers
         }
 
 
+        //This code represent status
         [HttpPost]
         public ActionResult UpdateUserStatus(int id, bool isActive)
         {
-
             using (SqlConnection conn = new SqlConnection(connections))
             {
                 string query = "UPDATE user_data SET IsActive = @IsActive WHERE Id = @Id";
