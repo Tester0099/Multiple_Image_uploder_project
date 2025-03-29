@@ -301,7 +301,5 @@ namespace RollProject.Controllers
             TempData["msg"] = "Update successfully";
             return RedirectToAction("Uploaded_ourImage");
         }
-
-        
     }
 }
