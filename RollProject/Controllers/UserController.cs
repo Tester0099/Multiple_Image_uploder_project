@@ -63,7 +63,7 @@ namespace RollProject.Controllers
             //user convert in integer
             int userid = Convert.ToInt32(Session["userid"]);
 
-
+            string Username = Session["username"].ToString();
             if (userid == 0)
             {
                 TempData["error"] = "User not found!";
@@ -97,11 +97,12 @@ namespace RollProject.Controllers
 
                     using (SqlConnection con = new SqlConnection(connections))
                     {
-                        string Query = "Insert into Image_data (image,Userid) values(@image,@Userid)";
+                        string Query = "Insert into Image_data (image,Userid,Username) values(@image,@Userid,@Username)";
                         using (SqlCommand cmd = new SqlCommand(Query, con))
                         {
                             cmd.Parameters.AddWithValue("@image", filename);
                             cmd.Parameters.AddWithValue("@Userid", userid);
+                            cmd.Parameters.AddWithValue("@Username",Username);
                             con.Open();
                             await cmd.ExecuteNonQueryAsync();
                         }

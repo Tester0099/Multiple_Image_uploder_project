@@ -12,5 +12,6 @@ namespace RollProject.Models
 		public int id { get; set; }	
 		public string image {  get; set; }
 		public int Userid { get; set; }
+        public string Username { get; set; }
 	}
 }

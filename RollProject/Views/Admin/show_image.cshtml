@@ -9,12 +9,14 @@
         <td>Id</td>
         <td>Image</td>
         <td>UserID</td>
+        <td>Username</td>
     </tr>
     @foreach (var data in Model) { 
         <tr>
             <td>@data.id</td>
             <td><img src="~/Content/Upload_Image/@data.image" style="width:100px; height:100px;"/></td>
             <td>@data.Userid</td>
+            <td>@data.Username</td>
         </tr>
     }
 </table>

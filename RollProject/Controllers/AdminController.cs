@@ -74,7 +74,7 @@ namespace RollProject.Controllers
         public async Task<ActionResult> Multiple_Image(IEnumerable<HttpPostedFileBase> image,user_data data,image_data info)
         {
             int userid = Convert.ToInt32(Session["userid"]);
-
+            string Username=Session["username"].ToString();
             if (Session["Userid"] == null)
             {
                 return RedirectToAction("SendOTP","Account");
@@ -110,11 +110,12 @@ namespace RollProject.Controllers
 
                         using (SqlConnection con = new SqlConnection(connections))
                         {
-                            string Query = "Insert into Image_data (image,Userid) values(@image,@Userid)";
+                            string Query = "Insert into Image_data (image,Userid,Username) values(@image,@Userid,@Username)";
                             using (SqlCommand cmd = new SqlCommand(Query, con))
                             {
                                 cmd.Parameters.AddWithValue("@image", filename);
                                 cmd.Parameters.AddWithValue("@Userid",userid);
+                                cmd.Parameters.AddWithValue("@Username",Username);
                                 con.Open();
                                 await cmd.ExecuteNonQueryAsync();
                             }
@@ -158,7 +159,8 @@ namespace RollProject.Controllers
                                 {
                                     id = Convert.ToInt32(red["id"]),
                                     image=red["image"].ToString(),
-                                    Userid = Convert.ToInt32(red["Userid"])
+                                    Userid = Convert.ToInt32(red["Userid"]),
+                                    Username=red["username"].ToString()
 
                                 });
                             }
